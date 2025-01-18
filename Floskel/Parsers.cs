@@ -1,12 +1,5 @@
-namespace Tongue;
+namespace Floskel;
 
-using System.Diagnostics.CodeAnalysis;
-
-using Microsoft.Extensions.Primitives;
-
-public delegate bool TryParse<TResult>(StringSegment input, [MaybeNullWhen(false)] out TResult result, out StringSegment remainder);
-
-// public delegate bool TryParse<TToken, TResult>(ReadOnlyMemory<TToken> input, [MaybeNullWhen(false)] out TResult result, out ReadOnlyMemory<TToken> remainder);
 
 public static partial class Parsers
 {
@@ -86,7 +79,7 @@ public static partial class Parsers
             first(input, out result, out remainder) || second(input, out result, out remainder);
     }
 
-    internal static TryParse<string> String(string v)
+    public static TryParse<string> String(string v)
     {
         return (StringSegment input, [MaybeNullWhen(false)] out string result, out StringSegment remainder) =>
         {

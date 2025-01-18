@@ -1,0 +1,3 @@
+﻿
+
+Generator.Generate();

@@ -1,6 +1,8 @@
+namespace Floskel;
+
 public partial class Parsers
 {
-    public static TryParse<(T1, T2)> Tuple<T1, T2>(TryParse<T1> parser1, TryParse<T2> parser2)
+    public static TryParse<(T1 First, T2 Second)> Tuple<T1, T2>(TryParse<T1> parser1, TryParse<T2> parser2)
     {
         return (StringSegment input, [MaybeNullWhen(false)] out (T1, T2) result, out StringSegment remainder) =>
         {
@@ -17,7 +19,7 @@ public partial class Parsers
             return false;
         };
     }
-    public static TryParse<(T1, T2, T3)> Tuple<T1, T2, T3>(TryParse<T1> parser1, TryParse<T2> parser2, TryParse<T3> parser3)
+    public static TryParse<(T1 First, T2 Second, T3 Third)> Tuple<T1, T2, T3>(TryParse<T1> parser1, TryParse<T2> parser2, TryParse<T3> parser3)
     {
         return (StringSegment input, [MaybeNullWhen(false)] out (T1, T2, T3) result, out StringSegment remainder) =>
         {
@@ -35,7 +37,7 @@ public partial class Parsers
             return false;
         };
     }
-    public static TryParse<(T1, T2, T3, T4)> Tuple<T1, T2, T3, T4>(TryParse<T1> parser1, TryParse<T2> parser2, TryParse<T3> parser3, TryParse<T4> parser4)
+    public static TryParse<(T1 First, T2 Second, T3 Third, T4 Fourth)> Tuple<T1, T2, T3, T4>(TryParse<T1> parser1, TryParse<T2> parser2, TryParse<T3> parser3, TryParse<T4> parser4)
     {
         return (StringSegment input, [MaybeNullWhen(false)] out (T1, T2, T3, T4) result, out StringSegment remainder) =>
         {

@@ -5,19 +5,10 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>Floskel</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Humanizer.Core" Version="2.14.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Watch Remove="generated.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Floskel\Floskel.csproj" />
+    <PackageReference Include="humanizer.Core" Version="2.14.1" />
   </ItemGroup>
 
 </Project>
