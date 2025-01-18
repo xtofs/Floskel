@@ -1,11 +1,13 @@
-   <Project>
-     <ItemGroup>
-       <Using Include="System"/>
-     </ItemGroup>
-     <ItemGroup>
-       <PackageReference Include="Microsoft.Extensions.Primitives" Version="9.0.0" />
-     </ItemGroup>
-     <ItemGroup>
-       <Using Include="System.Text"/>
-     </ItemGroup>
-   </Project>
+<Project>
+  <ItemGroup>
+    <Using Include="System"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="System.Text"/>
+    <Using Include="System.Diagnostics.CodeAnalysis"/>
+    <Using Include="Microsoft.Extensions.Primitives"/>
+  </ItemGroup>
+</Project>
