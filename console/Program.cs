@@ -3,10 +3,7 @@
 var input = "ab 0xFF";
 
 var decNumber = Parsers.While(char.IsAsciiDigit).Parse<int>();
-// var hexNumber =
-//     from prefix in Parsers.String("0x")
-//     from num in Parsers.While(char.IsAsciiHexDigit).Select(s => int.Parse(s, System.Globalization.NumberStyles.HexNumber))
-//     select num;
+
 var hexNumber = Parsers.Tuple(
     Parsers.String("0x"),
     Parsers.While(char.IsAsciiHexDigit).Select(s => int.Parse(s, System.Globalization.NumberStyles.HexNumber))

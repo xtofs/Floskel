@@ -73,20 +73,14 @@ public static partial class Parsers
         };
     }
 
-    public static TryParse<E> Or<E>(this TryParse<E> first, TryParse<E> second)
-    {
-        return (StringSegment input, [MaybeNullWhen(false)] out E result, out StringSegment remainder) =>
-            first(input, out result, out remainder) || second(input, out result, out remainder);
-    }
-
-    public static TryParse<string> String(string v)
+    public static TryParse<string> String(string value)
     {
         return (StringSegment input, [MaybeNullWhen(false)] out string result, out StringSegment remainder) =>
         {
-            if (input.StartsWith(v, StringComparison.Ordinal))
+            if (input.StartsWith(value, StringComparison.Ordinal))
             {
-                result = v;
-                remainder = input.Subsegment(v.Length);
+                result = value;
+                remainder = input.Subsegment(value.Length);
                 return true;
             }
             result = default!;
@@ -94,7 +88,6 @@ public static partial class Parsers
             return false;
         };
     }
-
 
 }
 

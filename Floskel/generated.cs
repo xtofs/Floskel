@@ -56,4 +56,25 @@ public partial class Parsers
             return false;
         };
     }
+    public static TryParse<T> Or<T>(this TryParse<T> parser1, TryParse<T> parser2)
+    {
+        return (StringSegment input, [MaybeNullWhen(false)] out T result, out StringSegment remainder) =>
+        {
+            return parser1(input, out result, out remainder) || parser2(input, out result, out remainder);
+        };
+    }
+    public static TryParse<T> Or<T>(this TryParse<T> parser1, TryParse<T> parser2, TryParse<T> parser3)
+    {
+        return (StringSegment input, [MaybeNullWhen(false)] out T result, out StringSegment remainder) =>
+        {
+            return parser1(input, out result, out remainder) || parser2(input, out result, out remainder) || parser3(input, out result, out remainder);
+        };
+    }
+    public static TryParse<T> Or<T>(this TryParse<T> parser1, TryParse<T> parser2, TryParse<T> parser3, TryParse<T> parser4)
+    {
+        return (StringSegment input, [MaybeNullWhen(false)] out T result, out StringSegment remainder) =>
+        {
+            return parser1(input, out result, out remainder) || parser2(input, out result, out remainder) || parser3(input, out result, out remainder) || parser4(input, out result, out remainder);
+        };
+    }
 }

@@ -8,19 +8,19 @@ namespace benchmark
     public class Benchmarks
     {
 
-        private static readonly TryParse<int> hexNumber1 =
+        private static readonly TryParse<int> HexNumber1 =
             from prefix in Parsers.String("0x")
             from num in Parsers.While(char.IsAsciiHexDigit).Select(s => int.Parse(s, System.Globalization.NumberStyles.HexNumber))
             select num;
 
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         public bool Scenario1()
         {
-            return hexNumber1("0xFF", out var result, out var remainder);
+            return HexNumber1("0xFFFF", out var result, out var remainder);
         }
 
 
-        private static readonly TryParse<int> hexNumber2 = Parsers.Tuple(
+        private static readonly TryParse<int> HexNumber2 = Parsers.Tuple(
             Parsers.String("0x"),
             Parsers.While(char.IsAsciiHexDigit).Select(s => int.Parse(s, System.Globalization.NumberStyles.HexNumber))
         ).Select(t => t.Second);
@@ -28,7 +28,7 @@ namespace benchmark
         [Benchmark]
         public bool Scenario2()
         {
-            return hexNumber2("0xFF", out var result, out var remainder);
+            return HexNumber2("0xFFFF", out var result, out var remainder);
         }
     }
 }
