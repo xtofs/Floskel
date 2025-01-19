@@ -10,7 +10,7 @@ namespace benchmark
 
         private static readonly TryParse<int> HexNumber1 =
             from prefix in Parsers.String("0x")
-            from num in Parsers.While(char.IsAsciiHexDigit).Select(s => int.Parse(s, System.Globalization.NumberStyles.HexNumber))
+            from num in Parsers.OneOrMore(char.IsAsciiHexDigit).Select(s => int.Parse(s, System.Globalization.NumberStyles.HexNumber))
             select num;
 
         [Benchmark(Baseline = true)]
@@ -22,7 +22,7 @@ namespace benchmark
 
         private static readonly TryParse<int> HexNumber2 = Parsers.Tuple(
             Parsers.String("0x"),
-            Parsers.While(char.IsAsciiHexDigit).Select(s => int.Parse(s, System.Globalization.NumberStyles.HexNumber))
+            Parsers.OneOrMore(char.IsAsciiHexDigit).Select(s => int.Parse(s, System.Globalization.NumberStyles.HexNumber))
         ).Select(t => t.Second);
 
         [Benchmark]

@@ -58,7 +58,28 @@ public static partial class Parsers
         };
     }
 
-    public static TryParse<StringSegment> While(Func<char, bool> predicate)
+    public static TryParse<StringSegment> OneOrMore(Func<char, bool> predicate)
+    {
+        return (StringSegment input, [MaybeNullWhen(false)] out StringSegment result, out StringSegment remainder) =>
+        {
+            if (input.Length > 0 && predicate(input[0]))
+            {
+                var index = 1;
+                while (index < input.Length && predicate(input[index]))
+                {
+                    index++;
+                }
+                result = input.Subsegment(0, index);
+                remainder = input.Subsegment(index);
+                return true;
+            }
+            result = default!;
+            remainder = input;
+            return false;
+        };
+    }
+
+    public static TryParse<StringSegment> Many(Func<char, bool> predicate)
     {
         return (StringSegment input, [MaybeNullWhen(false)] out StringSegment result, out StringSegment remainder) =>
         {
