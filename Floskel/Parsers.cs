@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace Floskel;
 
 
@@ -79,7 +81,7 @@ public static partial class Parsers
         };
     }
 
-    public static TryParse<StringSegment> Many(Func<char, bool> predicate)
+    public static TryParse<StringSegment> ZeroOrMore(Func<char, bool> predicate)
     {
         return (StringSegment input, [MaybeNullWhen(false)] out StringSegment result, out StringSegment remainder) =>
         {
@@ -110,6 +112,24 @@ public static partial class Parsers
         };
     }
 
+
+    public static TryParse<string> Regex(string v)
+    {
+        var regex = new Regex($"^{v}", RegexOptions.Compiled);
+        return (StringSegment input, [MaybeNullWhen(false)] out string result, out StringSegment remainder) =>
+        {
+            var match = regex.Match(input.Buffer!, input.Offset);
+            if (match.Success)
+            {
+                result = match.Value;
+                remainder = input.Subsegment(match.Length);
+                return true;
+            }
+            result = default!;
+            remainder = input;
+            return false;
+        };
+    }
 }
 
 

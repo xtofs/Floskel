@@ -1,3 +1,6 @@
+
+using System.Text.RegularExpressions;
+
 namespace Floskel;
 
 public partial class Parsers
@@ -77,4 +80,5 @@ public partial class Parsers
             return parser1(input, out result, out remainder) || parser2(input, out result, out remainder) || parser3(input, out result, out remainder) || parser4(input, out result, out remainder);
         };
     }
+
 }
